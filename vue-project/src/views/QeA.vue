@@ -127,6 +127,9 @@
 </template>
 
 <style>
+section {
+  height: 100vh;
+}
 body {
   height: 100vh;
 }

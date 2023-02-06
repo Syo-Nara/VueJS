@@ -1,8 +1,11 @@
-<script>
+<script setup>
 import { RouterLink } from "vue-router";
-export default {
-  name: "Navbar",
-};
+
+import useStore from "../store/userStore";
+
+const store = useStore();
+
+// const userStore = useUserStore();
 </script>
 
 <template>
@@ -37,13 +40,15 @@ export default {
       </div>
 
       <div class="navbar-end">
-        <div class="navbar-item">
+        <div v-if="store.Admin" class="navbar-item">
           <div class="buttons">
             <a class="button is-primary">
-              <strong>Sign up</strong>
+              <RouterLink to="/signup">
+                <strong style="color: white"> Sign up </strong>
+              </RouterLink>
             </a>
             <a class="button is-light">
-              <RouterLink to="/login">Log in</RouterLink>
+              <RouterLink to="/login" style="color: black">Log in</RouterLink>
             </a>
           </div>
         </div>

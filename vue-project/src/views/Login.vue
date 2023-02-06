@@ -1,30 +1,6 @@
 <script setup>
-import { Form, Field, ErrorMessage } from "vee-validate";
 import { accountService } from "../services/accountService";
-
-import { ref, computed } from "vue";
-import { useStore } from "vuex";
-import * as yup from "yup";
-
-// let loading = ref(false);
-// let message = "";
-
-// let schema = yup.object().shape({
-//   login: yup.string().required("Login is required!"),
-//   password: yup.string().required("Password is required!"),
-// });
-
-// const store = useStore();
-// let loggedIn = computed(() => {
-//   return store.state.auth.status.loggedIn;
-// });
-// let created = computed(() => {
-//   if (loggedIn) {
-//     console.log("success");
-
-//     // return $router.push("/home");
-//   }
-// });
+import router from "../router";
 
 let user = { login: "", password: "" };
 
@@ -33,7 +9,7 @@ function login() {
     .login(user)
     .then((res) => {
       console.log(res);
-      // $router.push("/home");
+      router.push("/");
     })
     .catch((err) => {
       console.log(err);
@@ -41,27 +17,6 @@ function login() {
 
   console.log(user);
 }
-
-// function handleLogin(user) {
-//   loading = true;
-//   console.log(user);
-//   console.log("dispatch go");
-
-//   store.dispatch("auth/login", user).then(
-//     () => {
-//       console.log("success");
-
-//       //   $router.push("/home");
-//     },
-//     (error) => {
-//       loading = false;
-//       message =
-//         (error.response && error.response.data & error.response.data.message) ||
-//         error.message ||
-//         error.toString();
-//     }
-//   );
-// }
 </script>
 
 <template>
@@ -106,40 +61,6 @@ function login() {
         </div>
       </div>
     </form>
-  </div>
-
-  <br />
-  <br />
-
-  <div>
-    <Form @submit="handleLogin" :validation-schema="schema">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <Field name="username" type="text" class="form-control" />
-        <ErrorMessage name="username" class="error-feedback" />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <Field name="password" type="password" class="form-control" />
-        <ErrorMessage name="password" class="error-feedback" />
-      </div>
-
-      <div class="form-group">
-        <button class="btn btn-primary btn-block" :disabled="loading">
-          <span
-            v-show="loading"
-            class="spinner-border spinner-border-sm"
-          ></span>
-          <span>Login</span>
-        </button>
-      </div>
-
-      <div class="form-group">
-        <div v-if="message" class="alert alert-danger" role="alert">
-          {{ message }}
-        </div>
-      </div>
-    </Form>
   </div>
 </template>
 
