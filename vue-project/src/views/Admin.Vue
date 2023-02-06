@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <p>Admin Vue</p>
+</template>
 
 <script setup></script>
 

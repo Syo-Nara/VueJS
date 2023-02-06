@@ -1,7 +1,5 @@
 import Axios from "./callerService";
 
-console.log("account service start");
-
 let login = (credentials) => {
   return Axios.post("/auth/login", credentials);
 };

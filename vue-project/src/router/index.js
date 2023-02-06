@@ -9,8 +9,6 @@ import Luskiddo from "@/views/Luskiddo.vue";
 import Register from "@/views/Register.vue";
 import Admin from "@/views/Admin.vue";
 
-console.log("Starting router");
-
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -26,11 +24,4 @@ const router = createRouter({
   ],
 });
 
-// router.beforeEach(() => {
-//   // ✅ This will work because the router starts its navigation after
-//   // the router is installed and pinia will be installed too
-//   const store = useStore();
-// });
-
-console.log("end router");
 export default router;

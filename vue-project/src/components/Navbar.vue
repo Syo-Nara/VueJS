@@ -1,11 +1,10 @@
 <script setup>
 import { RouterLink } from "vue-router";
+import { accountService } from "../services/accountService";
 
-import useStore from "../store/userStore";
+import userStore from "../store/userStore";
 
-const store = useStore();
-
-// const userStore = useUserStore();
+const store = userStore();
 </script>
 
 <template>
@@ -40,7 +39,7 @@ const store = useStore();
       </div>
 
       <div class="navbar-end">
-        <div v-if="store.Admin" class="navbar-item">
+        <div v-if="!store.loggedIn" class="navbar-item">
           <div class="buttons">
             <a class="button is-primary">
               <RouterLink to="/signup">
@@ -50,6 +49,12 @@ const store = useStore();
             <a class="button is-light">
               <RouterLink to="/login" style="color: black">Log in</RouterLink>
             </a>
+          </div>
+        </div>
+
+        <div v-if="!store.loggedIn" class="navbar-item">
+          <div class="buttons">
+            <a v-on:click="store.logout()" class="button is-dark"> Log out </a>
           </div>
         </div>
       </div>

@@ -1,22 +1,41 @@
 <script setup>
 import { accountService } from "../services/accountService";
-import router from "../router";
+import { ref, onMounted, computed } from "vue";
 
-let user = { login: "", password: "" };
+import router from "../router";
+import userStore from "@/store/userStore";
+
+var user = { login: "", password: "" };
+
+// const setUser = computed((value) => {
+//   store.setUser(value);
+// });
+// const u = computed((value) => {
+//   return store.getUser();
+// });
 
 function login() {
   accountService
     .login(user)
     .then((res) => {
-      console.log(res);
-      router.push("/");
+      console.log(res.data);
+      sessionStorage.setItem("user", res.data);
+
+      console.log(sessionStorage.getItem("user").data);
+
+      // store.user = true;
     })
     .catch((err) => {
       console.log(err);
     });
-
-  console.log(user);
+  console.log(localStorage.getItem("user").data);
 }
+
+// function onSubmit(credentials) {
+//   const store = userStore();
+//   console.log(credentials);
+//   store.login(credentials);
+// }
 </script>
 
 <template>
