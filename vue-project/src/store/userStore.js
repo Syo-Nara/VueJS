@@ -1,30 +1,49 @@
 import { defineStore } from "pinia";
 import Axios from "../services/callerService";
 
-const useStore = defineStore("userStore", {
+const useStore = defineStore({
+
+  id: "user",
   state: () => ({
-    Admin: false,
+    admin: false,
     loggedIn: false,
-    user: localStorage.getItem("user") || null,
+    user:  null,
   }),
 
-  getters: {
-    isAdmin(state) {
-      return state.Admin;
-    },
-    getUser(state) {
-      return state.user;
-    },
-  },
 
   actions: {
-    async login(credentials) {
+    async login(login, password) {
       try {
-        const user = Axios.post("/auth/login", credentials);
-        this.user = user.data;
-        localStorage.setItem("user", user);
-        console.log(localStorage.getItem("user"));
-        router.push("/");
+        const response = await Axios.post("/api/users/login",
+        {
+          login,
+          password
+        }, 
+        {
+          headers : {"Content-Type": "application/json"}
+        });
+        console.log(response);
+        this.user = response.data;
+        // router.push("/");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async register(user){
+      try {
+        const response = await Axios.post("/api/users/register",
+        {
+          login: user.login,
+          pseudo: user.pseudo,
+          email: user.email,
+          password: user.password
+        }, 
+        {
+          headers : {"Content-Type": "application/json"}
+        });
+        console.log(response);
+        // router.push("/login");
       } catch (error) {
         console.log(error);
       }

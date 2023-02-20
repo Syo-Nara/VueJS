@@ -6,10 +6,7 @@ import { RouterLink } from "vue-router";
   <body>
     <section class="hero is-fullheight is-bold">
       <div class="hero head">
-        <div
-          class="welcome-message has-text-centered has-text-weight-bold"
-          id="title"
-        >
+        <div class="welcome-message has-text-centered has-text-weight-bold" id="title">
           Welcome to Luskiddo's Panacea !
         </div>
       </div>
@@ -39,25 +36,16 @@ import { RouterLink } from "vue-router";
               </router-link>
 
               <a href="https://www.patreon.com/luskiddo">
-                <a class="button is-dark">
+                <a class="button is-dark" id="thick">
                   <i class="fa-brands fa-patreon"></i> &nbsp; Support me on
-                  Patreon !</a
-                >
+                  Patreon !</a> <!--MAKE ANIMATION UNDERLINE -->
               </a>
             </n-space>
           </div>
         </div>
       </div>
 
-      <div class="hero-foot">
-        <div class="container is-centered">
-          <div class="container">
-            <div class="container">
-              <p>herofoot</p>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </section>
   </body>
 </template>
@@ -69,6 +57,57 @@ import { RouterLink } from "vue-router";
 
 #title {
   color: white;
+}
+
+#thick {
+  background:
+    linear-gradient(#000 0 0) left /100% var(--d, 0%) no-repeat;
+  transition: 0.5s;
+}
+
+#thick:hover {
+  --d: 100%;
+  color: #fff;
+}
+
+
+#thick1 {
+  --b: 4px;
+  /* border length*/
+  --c: 20px;
+  /* the cube perspective */
+
+  --g: calc(var(--c)*0.707);
+  /* 0.707 = cos(45deg) = sin(45deg) */
+
+  color: blue;
+  transition: 0.5s;
+  border: solid transparent;
+  border-width: var(--b) calc(var(--c) + var(--b)) calc(var(--c) + var(--b)) var(--b);
+  background:
+    linear-gradient(45deg, transparent var(--g), rgba(255, 255, 255, 0.6) 0) right /var(--c) 100%,
+    linear-gradient(-135deg, transparent var(--g), rgba(255, 255, 255, 0.3) 0) bottom /100% var(--c),
+    conic-gradient(from -180deg at top var(--b) left var(--b), currentColor 270deg, transparent 0),
+    conic-gradient(from 0deg at bottom calc(var(--c) + var(--b)) right calc(var(--c) + var(--b)), currentColor 270deg, transparent 0);
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  transform: translate(calc(var(--c)/1), calc(var(--c)/1));
+  clip-path:
+    polygon(calc(100% - var(--c)) 0%, calc(100% - var(--c)) 0%,
+      0% 0%,
+      0% calc(100% - var(--c)), 0% calc(100% - var(--c)),
+      calc(100% - var(--c)) calc(100% - var(--c)),
+      calc(100% - var(--c)) calc(100% - var(--c)));
+}
+
+#thick1:hover {
+  transform: translate(0, 0);
+  clip-path:
+    polygon(100% var(--c), calc(100% - var(--c)) 0%,
+      0% 0%,
+      0% calc(100% - var(--c)), var(--c) 100%,
+      100% 100%,
+      100% 100%);
 }
 
 body {
@@ -113,5 +152,9 @@ body {
 .patreon-icon {
   font-size: 36px;
   color: white;
+}
+
+footer {
+  margin-bottom: 0;
 }
 </style>

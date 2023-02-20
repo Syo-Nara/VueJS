@@ -16,19 +16,18 @@
 
 <style>
 #Luskiddo {
-  color: linear-gradient(
-    45deg,
-    #405de6,
-    #5851db,
-    #833ab4,
-    #c13584,
-    #e1306c,
-    #fd1d1d
-  );
+  color: linear-gradient(45deg,
+      #405de6,
+      #5851db,
+      #833ab4,
+      #c13584,
+      #e1306c,
+      #fd1d1d);
 }
 
 footer {
-  margin-top: auto;
+  position: sticky;
   height: 10vh;
+
 }
 </style>

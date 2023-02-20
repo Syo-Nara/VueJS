@@ -1,16 +1,75 @@
 <script setup>
+import axios from 'axios';
+import { ref, onMounted, computed } from "vue";
+import { useUserStore } from "../store/contentStore";
+const store = useUserStore();
 
-import { ref } from 'vue';
 let imageUrl = ["src/assets/images/page25chap1.jpg", "src/assets/images/page26chap1.jpg", "src/assets/images/page27chap1.jpg"];
-
-let readingOption = ref("page");
+let numberOfPages = ref(imageUrl.length);
+const readingOption = ref("page");
 let chapters = ["Chapter 1", "Chapter 2", "Chapter 3"];
-let selectedChapter = chapters[0];
+let selectedChapter = ref(chapters[0]);
+const currentPage = ref(0);
+
+
+const previousPage = () => {
+  if (currentPage.value > 0) {
+    currentPage.value--;
+  }
+};
+
+const nextPage = () => {
+  if (currentPage.value < numberOfPages.value - 1) {
+    currentPage.value++;
+  }
+};
+
+
+const contents = computed(() => {
+  return store.contents;
+});
+
+onMounted(() => {
+  store.fetchContents();
+});
+
+
+
+// const options = {
+//   method: 'GET',
+//   url: 'https://webtoon.p.rapidapi.com/canvas/episodes/list',
+//   params: { titleNo: '767708', startIndex: '0', language: 'en', pageSize: '20' },
+//   headers: {
+//     'X-RapidAPI-Key': 'e45b8f8e37msh7236953828362b2p1e804bjsnbb7266f0a629',
+//     'X-RapidAPI-Host': 'webtoon.p.rapidapi.com'
+//   }
+// };
+
+// axios.request(options)
+//   .then(function (response) {
+//     // console.log("response");
+//     console.log(response.data.message.result.episodeList.episode);
+//     // content = response.data.message.result.episodeList.episode;
+//   })
+//   .catch(function (error) {
+//     console.error(error);
+//   });
+
+
+// const options1 = {
+//   method: 'GET',
+//   url: 'https://webtoon-phinf.pstatic.net/20220825_123/1661437225384bqI9o_PNG/83763ea8-f120-4ed9-ab2a-505cafeba9a6.png?type=q70',
+//   headers: {
+//     "Referer": "http://www.webtoon.com/"
+//   }
+// };
+
+// const image = await axios.request(options1)
 
 </script>
 
 <template>
-  
+
 
   <div class="dropdown" v-if="chapters.length > 0">
     <div class="field mr-2">
@@ -23,12 +82,13 @@ let selectedChapter = chapters[0];
         </div>
       </div>
     </div>
-    
+
     <div class="field">
       <div class="control">
         <div class="select">
           <select v-model="selectedChapter">
-            <option v-for="(chapter, index) in chapters" :key="index" :value="chapter">{{ chapter }}</option>
+            <option v-for="(content, index) in contents" :key="index" :value="content">{{ content.episodeTitle }}
+            </option>
           </select>
         </div>
       </div>
@@ -38,56 +98,47 @@ let selectedChapter = chapters[0];
 
   <div class="columns is-centered is-mobile" v-if="readingOption === 'all'">
     <div class="column is-center is-half img-container">
-      <img  v-for="(image, index) in imageUrl" :src="image" :key="index" class="is-centered"/>  <!-- ICI CHANGER BOUCLE D'ACCES AUX IMAGES-->
+      <img v-for="(image, index) in imageUrl" :src="image" :key="index" class="is-centered" />
+      <!-- ICI CHANGER BOUCLE D'ACCES AUX IMAGES-->
     </div>
   </div>
 
   <div class="columns is-centered is-mobile" v-if="readingOption === 'page'">
     <div class="column is-center is-half img-container">
-      <img  :src="imageUrl[2]"  class="is-centered"/>  <!-- ICI CHANGER BOUCLE D'ACCES AUX IMAGES-->
+      <img :src="imageUrl[currentPage]" class="is-centered" /> <!-- ICI CHANGER BOUCLE D'ACCES AUX IMAGES-->
     </div>
   </div>
 
+
+
   <nav v-if="readingOption === 'page'" class="pagination is-centered" role="navigation" aria-label="pagination">
-    <a class="pagination-previous">Previous</a>
-    <a class="pagination-next">Next</a>
+
     <ul class="pagination-list">
-      <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
-      <li><span class="pagination-ellipsis">&hellip;</span></li>
-      <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
-      <li>
-        <a
-          class="pagination-link is-current"
-          aria-label="Page 46"
-          aria-current="page"
-          >46</a
-        >
+
+      <li v-for="(item, index) in numberOfPages" :key="index">
+        <a v-bind:class="{ 'pagination-link is-current mr-6 ml-6': index + 1 === currentPage + 1 }"
+          @click="currentPage = index">
+          {{ index + 1 }}
+        </a>
       </li>
-      <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
-      <li><span class="pagination-ellipsis">&hellip;</span></li>
-      <li><a class="pagination-link" aria-label="Goto page 86">86</a></li>
     </ul>
+
+    <a class="pagination-previous" @click="previousPage">Previous</a>
+    <a class="pagination-next" @click="nextPage">Next</a>
   </nav>
+
 
 </template>
 
 <style>
-.pagination,
-.pagination-list {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  text-align: center;
+a.pagination-previous {
+  margin-left: 50vh;
+
+  font-weight: bold;
+
 }
 
-.pagination {
-  font-size: 1rem;
-  margin: -0.25rem;
+a.pagination-next {
+  margin-right: 50vh;
 }
 </style>

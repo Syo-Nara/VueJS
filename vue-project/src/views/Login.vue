@@ -1,86 +1,79 @@
 <script setup>
-import { accountService } from "../services/accountService";
 import { ref, onMounted, computed } from "vue";
-
-import router from "../router";
 import userStore from "@/store/userStore";
 
-var user = { login: "", password: "" };
+const user = ref({ login: "", password: "" });
 
-// const setUser = computed((value) => {
-//   store.setUser(value);
-// });
-// const u = computed((value) => {
-//   return store.getUser();
-// });
 
-function login() {
-  accountService
-    .login(user)
-    .then((res) => {
-      console.log(res.data);
-      sessionStorage.setItem("user", res.data);
-
-      console.log(sessionStorage.getItem("user").data);
-
-      // store.user = true;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  console.log(localStorage.getItem("user").data);
+const userStorea = new userStore();
+const login = async () => {
+  console.log(user.value);
+  await userStorea.login(user.value.login, user.value.password);
 }
 
-// function onSubmit(credentials) {
-//   const store = userStore();
-//   console.log(credentials);
-//   store.login(credentials);
-// }
+
 </script>
 
 <template>
-  <br />
-  <div class="container box p-6 has-background-light is-max-desktop">
-    <h1 class="title has-text-centered has-text-success">Enter Eden Island</h1>
-    <h2 class="subtitle has-text-centered">Log in Form</h2>
+  <body id="bg">
 
-    <form @submit.prevent="login">
-      <div class="field- is-medium">
-        <label class="label">Login</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            placeholder="Enter your login"
-            v-model="user.login"
-          />
-        </div>
-      </div>
+    <br />
+    <div class="box has-background-light" id="boxlogin">
+      <h1 class="title has-text-centered has-text-success">Enter Eden Island</h1>
+      <h2 class="subtitle has-text-centered">Log in Form</h2>
 
-      <div class="field is-medium">
-        <label class="label">Password</label>
-        <div class="control">
-          <input
-            class="input"
-            type="password"
-            placeholder="Enter your password"
-            v-model="user.password"
-          />
+      <form @submit.prevent="login">
+        <div class="field- is-medium">
+          <label class="label">Login</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="Enter your login" v-model="user.login" />
+          </div>
         </div>
-      </div>
 
-      <br />
+        <div class="field is-medium">
+          <label class="label">Password</label>
+          <div class="control">
+            <input class="input" type="password" placeholder="Enter your password" v-model="user.password" />
+          </div>
+        </div>
 
-      <div class="field is-grouped">
-        <div class="control">
-          <button class="button is-success">Log in</button>
+        <br />
+
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-success">Log in</button>
+          </div>
+          <div class="control">
+            <button class="button is-fail">Cancel</button>
+          </div>
         </div>
-        <div class="control">
-          <button class="button is-fail">Cancel</button>
-        </div>
-      </div>
-    </form>
-  </div>
+      </form>
+    </div>
+  </body>
 </template>
 
-<style></style>
+<style>
+#bg {
+  background-image: url("../assets/steampunk/wallhaven-4y2ov7.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#boxlogin {
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+}
+</style>

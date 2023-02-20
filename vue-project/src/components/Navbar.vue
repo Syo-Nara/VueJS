@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink } from "vue-router";
-import { accountService } from "../services/accountService";
 
 import userStore from "../store/userStore";
 
@@ -63,7 +62,7 @@ const store = userStore();
     </div>
   </nav>
 
-  <!-- <nav class="level">
+<!-- <nav class="level">
     <p class="level-item has-text-centered">
       <a class="link is-info"> <RouterLink to="/">Home</RouterLink> </a>
     </p>
@@ -94,8 +93,7 @@ const store = userStore();
         </div>
       </div>
     </div>
-  </nav> -->
-</template>
+  </nav> --></template>
 
 <style>
 .navbar {
