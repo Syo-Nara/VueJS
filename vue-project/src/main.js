@@ -15,16 +15,13 @@ import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 library.add(faUserSecret);
 
 const pinia = createPinia();
-console.log("pinia done");
 
 const app = createApp(App)
   .component("font-awesome-icon", FontAwesomeIcon)
   .use(pinia);
 
-console.log("app done");
 
 app.use(router);
-console.log("router done");
 app.use(naive);
 
 app.mount("#app");

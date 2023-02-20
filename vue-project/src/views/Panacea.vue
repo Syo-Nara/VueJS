@@ -1,31 +1,54 @@
 <script setup>
-let imageUrl = "src/assets/images/page25chap1.jpg";
+
+import { ref } from 'vue';
+let imageUrl = ["src/assets/images/page25chap1.jpg", "src/assets/images/page26chap1.jpg", "src/assets/images/page27chap1.jpg"];
+
+let readingOption = ref("page");
+let chapters = ["Chapter 1", "Chapter 2", "Chapter 3"];
+let selectedChapter = chapters[0];
+
 </script>
 
 <template>
-  <div class="columns is-centered is-mobile is-centered">
-    <div class="column is-centered is-half">
-      <p class="bd-notification is-primary">
-        <code class="html">is-half</code><br />
-      </p>
-    </div>
-  </div>
+  
 
-  <section class="section">
-    <div class="container box p-1 is-centered">
-      <div class="columns is-centered">
-        <div class="column is centered is-half" style="color: black">
-          <p class="is-right">Centered</p>
+  <div class="dropdown" v-if="chapters.length > 0">
+    <div class="field mr-2">
+      <div class="control">
+        <div class="select">
+          <select v-model="readingOption">
+            <option value="all">All in one page</option>
+            <option value="page">Page by page</option>
+          </select>
         </div>
       </div>
     </div>
-  </section>
-
-  <div class="column is-centered is-half">
-    <img :src="imageUrl" />
+    
+    <div class="field">
+      <div class="control">
+        <div class="select">
+          <select v-model="selectedChapter">
+            <option v-for="(chapter, index) in chapters" :key="index" :value="chapter">{{ chapter }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+
+  <div class="columns is-centered is-mobile" v-if="readingOption === 'all'">
+    <div class="column is-center is-half img-container">
+      <img  v-for="(image, index) in imageUrl" :src="image" :key="index" class="is-centered"/>  <!-- ICI CHANGER BOUCLE D'ACCES AUX IMAGES-->
+    </div>
+  </div>
+
+  <div class="columns is-centered is-mobile" v-if="readingOption === 'page'">
+    <div class="column is-center is-half img-container">
+      <img  :src="imageUrl[2]"  class="is-centered"/>  <!-- ICI CHANGER BOUCLE D'ACCES AUX IMAGES-->
+    </div>
+  </div>
+
+  <nav v-if="readingOption === 'page'" class="pagination is-centered" role="navigation" aria-label="pagination">
     <a class="pagination-previous">Previous</a>
     <a class="pagination-next">Next</a>
     <ul class="pagination-list">
@@ -46,7 +69,6 @@ let imageUrl = "src/assets/images/page25chap1.jpg";
     </ul>
   </nav>
 
-  <div></div>
 </template>
 
 <style>

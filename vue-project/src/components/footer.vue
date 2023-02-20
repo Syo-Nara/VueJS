@@ -1,7 +1,5 @@
-<script>
-export default {
-  name: "CFooter",
-};
+<script setup>
+
 </script>
 <template>
   <footer class="footer">
@@ -31,5 +29,6 @@ export default {
 
 footer {
   margin-top: auto;
+  height: 10vh;
 }
 </style>

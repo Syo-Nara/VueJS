@@ -2,7 +2,7 @@
 import { RouterLink } from "vue-router";
 </script>
 <template>
-  <Navbar />
+
   <body>
     <section class="hero is-fullheight is-bold">
       <div class="hero head">

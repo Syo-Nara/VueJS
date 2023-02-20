@@ -5,10 +5,12 @@ import { accountService } from "../services/accountService";
 import userStore from "../store/userStore";
 
 const store = userStore();
+
+
 </script>
 
 <template>
-  <nav class="navbar is-mobile">
+  <nav class="navbar is-mobile mb-2">
     <div class="navbar-brand">
       <a class="navbar-item">
         <RouterLink to="/"> LUSKIDDO </RouterLink>
