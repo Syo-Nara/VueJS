@@ -8,7 +8,13 @@ const user = ref({ login: "", password: "" });
 const userStorea = new userStore();
 const login = async () => {
   console.log(user.value);
+
   await userStorea.login(user.value.login, user.value.password);
+  if (userStorea.user != null) {
+    sessionStorage.setItem('userConnected', JSON.stringify(userStorea.user));
+    console.log(sessionStorage.getItem('userConnected'));
+    userStorea.loggedIn = true;
+  }
 }
 
 
@@ -24,14 +30,14 @@ const login = async () => {
 
       <form @submit.prevent="login">
         <div class="field- is-medium">
-          <label class="label">Login</label>
+          <label class="label" id="label">Login</label>
           <div class="control">
             <input class="input" type="text" placeholder="Enter your login" v-model="user.login" />
           </div>
         </div>
 
         <div class="field is-medium">
-          <label class="label">Password</label>
+          <label class="label" id="label">Password</label>
           <div class="control">
             <input class="input" type="password" placeholder="Enter your password" v-model="user.password" />
           </div>
@@ -52,7 +58,7 @@ const login = async () => {
   </body>
 </template>
 
-<style>
+<style scoped>
 #bg {
   background-image: url("../assets/steampunk/wallhaven-4y2ov7.jpg");
   background-size: cover;
@@ -70,6 +76,11 @@ const login = async () => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+}
+
+#label {
+  color: black;
 }
 
 body {

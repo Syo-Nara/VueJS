@@ -1,9 +1,12 @@
 <template>
   <div id="app">
-    <Navbar />
+    <Navbar></Navbar>
     <RouterView />
 
-    <Footer />
+    <Footer></Footer>
+
+
+
   </div>
 </template>
 
@@ -12,11 +15,14 @@ import { RouterView } from "vue-router";
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/footer.vue";
 </script>
-
 <style scoped>
-html,
 body {
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
+footer {
+  margin-top: auto;
 }
 </style>

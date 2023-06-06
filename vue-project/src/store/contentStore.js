@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 // Import axios to make HTTP requests
 import axios from "axios"
-export const useUserStore = defineStore("user", {
+import Axios from '../services/callerService'
+export const useContentStore = defineStore("Content", {
     state: () => ({
         users: [],
         contents: [],
@@ -25,6 +26,21 @@ export const useUserStore = defineStore("user", {
             console.log(error)
         }
       },
+      
+      async postContent(images) {
+
+        try{
+          const response = await Axios.post('api/pages',  
+          {
+            "img": images.content,
+          })
+          console.log(response)
+
+        } catch(e){
+          console.log(e);
+        }
+      },
+
       async fetchContents() {
         try{
             const options = {

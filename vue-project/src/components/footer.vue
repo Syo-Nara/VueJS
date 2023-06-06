@@ -14,20 +14,15 @@
   </footer>
 </template>
 
-<style>
-#Luskiddo {
-  color: linear-gradient(45deg,
-      #405de6,
-      #5851db,
-      #833ab4,
-      #c13584,
-      #e1306c,
-      #fd1d1d);
+<style scoped>
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 footer {
-  position: sticky;
+  margin-top: auto;
   height: 10vh;
-
 }
 </style>

@@ -2,61 +2,58 @@
 import { RouterLink } from "vue-router";
 </script>
 <template>
+  <section class="hero is-fullheight is-bold">
 
-  <body>
-    <section class="hero is-fullheight is-bold">
-      <div class="hero head">
-        <div class="welcome-message has-text-centered has-text-weight-bold" id="title">
-          Welcome to Luskiddo's Panacea !
-        </div>
+    <div class="hero-body">
+      <div class="welcome-message has-text-centered has-text-weight-bold" id="title" style="color:white">
+        Welcome to Luskiddo's Panacea !
       </div>
-      <div class="hero-body">
-        <div class="flex container">
-          <div class="welcome-container">
-            <div class="welcome-message has-text-justified">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam,
-              itaque nesciunt? Esse accusamus reprehenderit ut, dolor
-              consequatur nisi repudiandae est fuga eveniet sed neque beatae
-              dolore ea. Obcaecati, cumque illum?
-            </div>
-
-            <br />
-            <br />
-            <n-space style="z-index: 1">
-              <router-link to="/panacea">
-                <a class="button is-primary">
-                  <strong>Last Chapter</strong>
-                </a>
-              </router-link>
-
-              <router-link to="/q&a">
-                <a class="button is-light">
-                  <strong>Ask me anything!</strong>
-                </a>
-              </router-link>
-
-              <a href="https://www.patreon.com/luskiddo">
-                <a class="button is-dark" id="thick">
-                  <i class="fa-brands fa-patreon"></i> &nbsp; Support me on
-                  Patreon !</a> <!--MAKE ANIMATION UNDERLINE -->
-              </a>
-            </n-space>
+      <br>
+      <div class="flex container">
+        <div class="welcome-container">
+          <div class="welcome-message has-text-justified">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam,
+            itaque nesciunt? Esse accusamus reprehenderit ut, dolor
+            consequatur nisi repudiandae est fuga eveniet sed neque beatae
+            dolore ea. Obcaecati, cumque illum?
           </div>
+
+          <br />
+          <br />
+          <n-space style="z-index: 1">
+            <router-link to="/panacea">
+              <a class="button is-primary">
+                <strong>Last Chapter</strong>
+              </a>
+            </router-link>
+
+            <router-link to="/q&a">
+              <a class="button is-light">
+                <strong>Ask me anything!</strong>
+              </a>
+            </router-link>
+
+            <a href="https://www.patreon.com/luskiddo">
+              <a class="button is-dark" id="thick1">
+                <i class="fa-brands fa-patreon"></i> &nbsp; Support me on
+                Patreon !</a> <!--MAKE ANIMATION UNDERLINE -->
+            </a>
+          </n-space>
         </div>
       </div>
+    </div>
 
 
-    </section>
-  </body>
+  </section>
 </template>
 
-<style>
+<style scoped>
 .background-image {
   z-index: 0;
 }
 
 #title {
-  color: white;
+  color: rgb(240, 240, 240);
 }
 
 #thick {
@@ -80,7 +77,7 @@ import { RouterLink } from "vue-router";
   --g: calc(var(--c)*0.707);
   /* 0.707 = cos(45deg) = sin(45deg) */
 
-  color: blue;
+  color: rgb(197, 104, 16);
   transition: 0.5s;
   border: solid transparent;
   border-width: var(--b) calc(var(--c) + var(--b)) calc(var(--c) + var(--b)) var(--b);
@@ -114,7 +111,7 @@ body {
   height: 100vh;
 }
 
-.hero {
+.hero-body {
   background-image: url(src/assets/images/bg_panacea.jpg);
   background-size: cover;
   background-position: initial;
@@ -152,9 +149,5 @@ body {
 .patreon-icon {
   font-size: 36px;
   color: white;
-}
-
-footer {
-  margin-bottom: 0;
 }
 </style>

@@ -1,8 +1,6 @@
 <script setup></script>
 
 <template>
-
-  
   <body>
     <section>
       <div class="container">
@@ -13,11 +11,8 @@
               <div class="media">
                 <div class="media-left">
                   <figure class="image is-64x64">
-                    <img
-                      class="is-rounded"
-                      src="https://bulma.dev/placeholder/pictures/bg_circle.svg?primary=00d1b2"
-                      alt=""
-                    />
+                    <img class="is-rounded" src="https://bulma.dev/placeholder/pictures/bg_circle.svg?primary=00d1b2"
+                      alt="" />
                   </figure>
                 </div>
                 <div class="media-content">
@@ -43,11 +38,8 @@
               <div class="media">
                 <div class="media-left">
                   <figure class="image is-64x64">
-                    <img
-                      class="is-rounded"
-                      src="https://bulma.dev/placeholder/pictures/bg_circle.svg?primary=00d1b2"
-                      alt=""
-                    />
+                    <img class="is-rounded" src="https://bulma.dev/placeholder/pictures/bg_circle.svg?primary=00d1b2"
+                      alt="" />
                   </figure>
                 </div>
                 <div class="media-content">
@@ -69,11 +61,8 @@
               <div class="media">
                 <div class="media-left">
                   <figure class="image is-64x64">
-                    <img
-                      class="is-rounded"
-                      src="https://bulma.dev/placeholder/pictures/bg_circle.svg?primary=00d1b2"
-                      alt=""
-                    />
+                    <img class="is-rounded" src="https://bulma.dev/placeholder/pictures/bg_circle.svg?primary=00d1b2"
+                      alt="" />
                   </figure>
                 </div>
                 <div class="media-content">
@@ -95,11 +84,8 @@
               <div class="media">
                 <div class="media-left">
                   <figure class="image is-64x64">
-                    <img
-                      class="is-rounded"
-                      src="https://bulma.dev/placeholder/pictures/bg_circle.svg?primary=00d1b2"
-                      alt=""
-                    />
+                    <img class="is-rounded" src="https://bulma.dev/placeholder/pictures/bg_circle.svg?primary=00d1b2"
+                      alt="" />
                   </figure>
                 </div>
                 <div class="media-content">
@@ -128,10 +114,11 @@
   </body>
 </template>
 
-<style>
+<style scoped>
 section {
   height: 100vh;
 }
+
 body {
   height: 100vh;
 }

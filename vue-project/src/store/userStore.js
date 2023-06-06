@@ -1,30 +1,36 @@
 import { defineStore } from "pinia";
 import Axios from "../services/callerService";
+import  router  from "../router/index";
 
 const useStore = defineStore({
 
   id: "user",
   state: () => ({
-    admin: false,
+    admin: true,
     loggedIn: false,
     user:  null,
   }),
 
 
   actions: {
+    async logout(){
+      this.loggedIn = false;
+      this.user = null;
+      router.push("/");
+    },
     async login(login, password) {
       try {
         const response = await Axios.post("/api/users/login",
         {
           login,
           password
-        }, 
+        },
         {
           headers : {"Content-Type": "application/json"}
-        });
+        })
         console.log(response);
         this.user = response.data;
-        // router.push("/");
+        router.push("/");
       } catch (error) {
         console.log(error);
       }
@@ -40,10 +46,12 @@ const useStore = defineStore({
           password: user.password
         }, 
         {
-          headers : {"Content-Type": "application/json"}
+          headers : {
+            "method": "POST",
+            "Content-Type": "application/json"}
         });
         console.log(response);
-        // router.push("/login");
+        router.push("/login");
       } catch (error) {
         console.log(error);
       }

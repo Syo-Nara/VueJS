@@ -1,8 +1,8 @@
 <script setup>
 import axios from 'axios';
 import { ref, onMounted, computed } from "vue";
-import { useUserStore } from "../store/contentStore";
-const store = useUserStore();
+import { useContentStore } from "../store/contentStore";
+const store = useContentStore();
 
 let imageUrl = ["src/assets/images/page25chap1.jpg", "src/assets/images/page26chap1.jpg", "src/assets/images/page27chap1.jpg"];
 let numberOfPages = ref(imageUrl.length);
@@ -29,9 +29,9 @@ const contents = computed(() => {
   return store.contents;
 });
 
-onMounted(() => {
-  store.fetchContents();
-});
+// onMounted(() => {
+//   store.fetchContents();
+// });
 
 
 
@@ -68,69 +68,69 @@ onMounted(() => {
 
 </script>
 
-<template>
+<template >
+  <div id="bg-panacea">
+    <div class="pt-2 pb-2 ml-2 mb-2">
+      <div class="dropdown" v-if="chapters.length > 0">
+        <div class="field mr-2">
+          <div class="control">
+            <div class="select">
+              <select v-model="readingOption">
+                <option value="all">All in one page</option>
+                <option value="page">Page by page</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-
-  <div class="dropdown" v-if="chapters.length > 0">
-    <div class="field mr-2">
-      <div class="control">
-        <div class="select">
-          <select v-model="readingOption">
-            <option value="all">All in one page</option>
-            <option value="page">Page by page</option>
-          </select>
+        <div class="field">
+          <div class="control">
+            <div class="select">
+              <select v-model="selectedChapter">
+                <option v-for="(content, index) in chapters" :key="index" :value="content">{{ content }}
+                </option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="field">
-      <div class="control">
-        <div class="select">
-          <select v-model="selectedChapter">
-            <option v-for="(content, index) in contents" :key="index" :value="content">{{ content.episodeTitle }}
-            </option>
-          </select>
+
+      <div class="columns is-centered is-mobile" v-if="readingOption === 'all'">
+        <div class="column is-center is-half img-container">
+          <img v-for="(image, index) in imageUrl" :src="image" :key="index" class="is-centered" />
+          <!-- ICI CHANGER BOUCLE D'ACCES AUX IMAGES-->
         </div>
       </div>
+
+      <div class="columns is-centered is-mobile" v-if="readingOption === 'page'">
+        <div class="column is-center is-half img-container">
+          <img :src="imageUrl[currentPage]" class="is-centered" /> <!-- ICI CHANGER BOUCLE D'ACCES AUX IMAGES-->
+        </div>
+      </div>
+
+
+
+      <nav v-if="readingOption === 'page'" class="pagination is-centered" role="navigation" aria-label="pagination">
+
+        <ul class="pagination-list">
+
+          <li v-for="(item, index) in numberOfPages" :key="index">
+            <a v-bind:class="{ 'pagination-link is-current mr-6 ml-6': index + 1 === currentPage + 1 }"
+              @click="currentPage = index">
+              {{ index + 1 }}
+            </a>
+          </li>
+        </ul>
+
+        <a class="pagination-previous" @click="previousPage">Previous</a>
+        <a class="pagination-next" @click="nextPage">Next</a>
+      </nav>
     </div>
   </div>
-
-
-  <div class="columns is-centered is-mobile" v-if="readingOption === 'all'">
-    <div class="column is-center is-half img-container">
-      <img v-for="(image, index) in imageUrl" :src="image" :key="index" class="is-centered" />
-      <!-- ICI CHANGER BOUCLE D'ACCES AUX IMAGES-->
-    </div>
-  </div>
-
-  <div class="columns is-centered is-mobile" v-if="readingOption === 'page'">
-    <div class="column is-center is-half img-container">
-      <img :src="imageUrl[currentPage]" class="is-centered" /> <!-- ICI CHANGER BOUCLE D'ACCES AUX IMAGES-->
-    </div>
-  </div>
-
-
-
-  <nav v-if="readingOption === 'page'" class="pagination is-centered" role="navigation" aria-label="pagination">
-
-    <ul class="pagination-list">
-
-      <li v-for="(item, index) in numberOfPages" :key="index">
-        <a v-bind:class="{ 'pagination-link is-current mr-6 ml-6': index + 1 === currentPage + 1 }"
-          @click="currentPage = index">
-          {{ index + 1 }}
-        </a>
-      </li>
-    </ul>
-
-    <a class="pagination-previous" @click="previousPage">Previous</a>
-    <a class="pagination-next" @click="nextPage">Next</a>
-  </nav>
-
-
 </template>
 
-<style>
+<style scoped>
 a.pagination-previous {
   margin-left: 50vh;
 
@@ -140,5 +140,9 @@ a.pagination-previous {
 
 a.pagination-next {
   margin-right: 50vh;
+}
+
+#bg-panacea {
+  background-color: #087A4F;
 }
 </style>
